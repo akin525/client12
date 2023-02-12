@@ -28,11 +28,12 @@ export default function Airtime() {
     function contactCallback(data) {
         console.log("I am in callback")
         console.log(JSON.stringify(data));
+        alert(JSON.stringify(data));
         document.getElementById('number').value=data.data;
         setnumber(data.data);
     }
 function pick(){
-    window.web2app.selectContact(contactCallback);
+    window.web2app.showinterstitial(contactCallback);
 }
 console.log()
     React.useEffect(() => {
