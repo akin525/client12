@@ -25,13 +25,15 @@ export default function Purchase({color}) {
     function contactCallback(data) {
         console.log("I am in callback")
         console.log(JSON.stringify(data));
-        // document.getElementById('anyme'.value=data.data;
+        document.getElementById('anyme').value=data.data;
         alert(JSON.stringify(data));
     }
     React.useEffect(() => {
+
         setLoading(true);
         try {
-            window.web2app.showinterstitial(contactCallback);
+            window.web2app.showinterstitial(myCallback);
+
         }catch (e) {
             console.log("Can not excecute for now");
         }
@@ -98,7 +100,7 @@ export default function Purchase({color}) {
                         <div className="block w-full overflow-x-auto">
                             {/* Projects table */}
 
-                            {loading ? <div className="loader-container">
+                            {loading ? <div id={'anyme'} className="loader-container">
                                     <div className="spinner"/>
                                 </div> :
                                 <table className="items-center w-full bg-transparent border-collapse">
