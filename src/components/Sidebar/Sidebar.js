@@ -48,7 +48,6 @@ export default function Sidebar() {
   function myCallback(data) {
     console.log("I am in callback")
     console.log(JSON.stringify(data));
-    alert(JSON.stringify(data));
   }
 
   function contactCallback(data) {
@@ -151,7 +150,7 @@ export default function Sidebar() {
           {/* Brand */}
           <Link
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            to="/"
+            to="/dashboard"
           >
             {name}
           </Link>
@@ -177,7 +176,7 @@ export default function Sidebar() {
                 <div className="w-6/12">
                   <Link
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                    to="/"
+                    to="/dashboard"
                   >
                     {username}
                   </Link>
@@ -280,6 +279,29 @@ export default function Sidebar() {
                     }
                   ></i>{" "}
                   Profile
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                    onClick={() => setCollapseShow("hidden")}
+
+                    className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/upgrade") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/upgrade"
+                >
+                  <i
+                    className={
+                      "fas fa-bookmark mr-2 text-sm " +
+                      (window.location.href.indexOf("/upgrade") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Become Reseller
                 </Link>
               </li>
               <li className="items-center">

@@ -33,6 +33,7 @@ ReactDOM.render(
       <Route path="/createlock" exact component={Admin} />
       <Route path="/tv" exact component={Admin} />
       <Route path="/addlock" exact component={Admin} />
+      <Route path="/upgrade" exact component={Admin} />
       <Route path="/elect" exact component={Admin} />
       <Route path="/withdraw" exact component={Admin} />
       <Route path="/data" exact component={Admin} />

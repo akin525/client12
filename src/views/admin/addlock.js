@@ -74,62 +74,6 @@ export default function Dashboard({color}) {
 
 
 
-    // const handleSubmit  = async () =>  {
-    //
-    //
-    //     try {
-    //         axios
-    //             .post(baseURL, {
-    //
-    //                 userId:userid,
-    //                 id:productid,
-    //                 number:number,
-    //                 refid:refid,
-    //             },{
-    //                 headers:{
-    //                     Authorization: `Bearer ${token}`
-    //                 },
-    //
-    //             }).then(response => {
-    //             setError("");
-    //             setMessage(response);
-    //             console.log("response");
-    //             console.log(response);
-    //             if (response.data.status === "0") {
-    //                 setError(response.data.message);
-    //                 swal({
-    //                     title: "Fail",
-    //                     text: response.data.message,
-    //                     icon: "error",
-    //                     confirmButtonText: "OK",
-    //                 }).then(function () {
-    //                     // Redirect the user
-    //                     window.location.href = "/data";
-    //                 });
-    //
-    //
-    //             }else{
-    //                 setMessage(response.data.message);
-    //                 swal({
-    //                     title: "Success",
-    //                     text: response.data.message,
-    //                     icon: "success",
-    //                     confirmButtonText: "OK",
-    //                 }).then(function () {
-    //                     // Redirect the user
-    //                     window.location.href = "/dashboard";
-    //                 });
-    //             }
-    //         });
-    //     }catch (e) {
-    //         console.log(e);
-    //         console.log("e.data");
-    //         console.log(e.data);
-    //         setError("An error occured. Check your input and try again");
-    //     }
-    // }
-
-
     return(
         <>
             {loading ? <div className="loader-container">

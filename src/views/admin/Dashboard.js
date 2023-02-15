@@ -5,7 +5,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
 
-import ig from 'images.png';
+import ig from 'ba1.png';
 import CardLineChart from "components/Cards/CardLineChart.js";
 import CardBarChart from "components/Cards/CardBarChart.js";
 import CardPageVisits from "components/Cards/CardPageVisits.js";
@@ -259,7 +259,8 @@ export default function Dashboard() {
                 </div>
             </div>
         </div>
-
+        <br></br>
+        <img src={ig} />
 
         <br></br>
 
