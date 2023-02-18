@@ -121,10 +121,7 @@ console.log(baseURL);
                 text: response.data.message,
                 icon: "error",
                 confirmButtonText: "OK",
-              }).then(function () {
-                // Redirect the user
-                window.location.href = "/auth/register";
-              });
+              })
 
 
             }else{
