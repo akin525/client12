@@ -36,6 +36,7 @@ export default function Data() {
     }
     function pick(){
         window.web2app.selectContact(contactCallback);
+
     }
 
     function myNewFunction(sel) {
@@ -48,7 +49,12 @@ export default function Data() {
     let token=localStorage.getItem('dataKey');
 
     React.useEffect(() => {
+        try {
+            window.web2app.showbanner(myCallback);
 
+        }catch (e) {
+            console.log("Can not excecute for now");
+        }
         try {//
             window.web2app.deviceInfo(myCallback);
         }catch (e) {
@@ -72,7 +78,7 @@ export default function Data() {
                 if (response.data.status ==="0"){
                     window.location='login';
                 }
-                console.log(response.data);
+                // console.log(response.data);
 
             });
 

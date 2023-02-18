@@ -79,7 +79,6 @@ export default function Sidebar() {
           if (response.data.status ==="0"){
             window.location='login';
           }
-          console.log(response.data);
           setusername(response.data.username);
           setName(response.data.username);
           setEmail(response.data.email);

@@ -58,7 +58,7 @@ export default function Dashboard() {
                 if (response.data.status ==="0"){
                     window.location='auth/login';
                 }
-                console.log(response.data);
+                // console.log(response.data);
                 setusername(response.data.username);
                 setName(response.data.username);
                 setEmail(response.data.email);

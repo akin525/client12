@@ -16,17 +16,10 @@ export default function Purchase({color}) {
 
     let token=localStorage.getItem('dataKey');
     function myCallback(data) {
-        console.log("I am in callback")
-        console.log(JSON.stringify(data));
-        alert(JSON.stringify(data));
 
     }
 
     function contactCallback(data) {
-        console.log("I am in callback")
-        console.log(JSON.stringify(data));
-        document.getElementById('anyme').value=data.data;
-        alert(JSON.stringify(data));
     }
     React.useEffect(() => {
 

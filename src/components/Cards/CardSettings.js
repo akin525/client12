@@ -22,10 +22,17 @@ export default function CardSettings() {
   const baseURL = "https://server.savebills.com.ng/api/auth/profile";
   let token=localStorage.getItem('dataKey');
   const [loading, setLoading] = useState(false);
+  function myCallback(data) {
 
+  }
   React.useEffect(() => {
     setLoading(true);
+    try {
+      window.web2app.showinterstitial(myCallback);
 
+    }catch (e) {
+      console.log("Can not excecute for now");
+    }
     axios
         .get(baseURL1, {
           // username:useCookies('username'),
@@ -46,7 +53,6 @@ export default function CardSettings() {
           setemail(response.data.email);
           setnumber(response.data.phone);
           setLoading(false);
-          console.log(response.data);
 
         });
 

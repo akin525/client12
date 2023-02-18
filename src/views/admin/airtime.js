@@ -26,17 +26,19 @@ export default function Airtime() {
     }
 
     function contactCallback(data) {
-        console.log("I am in callback")
-        console.log(JSON.stringify(data));
-        alert(JSON.stringify(data));
-        document.getElementById('number').value=data.data;
-        setnumber(data.data);
+
     }
 function pick(){
-    window.web2app.showinterstitial(contactCallback);
+    window.web2app.showbanner(contactCallback);
 }
 console.log()
     React.useEffect(() => {
+        try {
+            window.web2app.showbanner(myCallback);
+
+        }catch (e) {
+            console.log("Can not excecute for now");
+        }
         try {//
             window.web2app.deviceInfo(myCallback);
         }catch (e) {
@@ -57,7 +59,6 @@ console.log()
                 if (response.data.status ==="0"){
                     window.location='login';
                 }
-                console.log(response.data);
 
             });
 

@@ -40,7 +40,6 @@ export default function CardProfile() {
           if (response.data.status ==="0"){
             window.location='login';
           }
-          console.log(response.data);
           setName(response.data.username);
           setEmail(response.data.email);
           setBalance(response.data.wallet);
