@@ -8,7 +8,7 @@ import CardProfile from "../../components/Cards/CardProfile";
 import gh from "../../lg.png";
 import ig from "../../ba.png";
 
-export default function Upgrade() {
+export default function Reseller() {
     const [network, setnetwork] = useState("");
     const [con, setcon] = useState("");
     const [amount, setamount] = useState("");
@@ -17,6 +17,7 @@ export default function Upgrade() {
     const [userid, setuserid] = useState("");
     const [number,setnumber] = useState("");
     const [refid,setrefid] = useState("");
+    const [apikey, setapikey] = useState("");
     const baseURL1 = "https://server.savebills.com.ng/api/auth/dashboard";
     const [loading, setloading]=useState(false);
     const baseURL = "https://server.savebills.com.ng/api/auth/upgrade";
@@ -55,6 +56,7 @@ console.log()
                 setError("");
                 setMessage(response);
                 setuserid(response.data.id);
+                setapikey(response.data.apikey);
                 if (response.data.status ==="0"){
                     window.location='login';
                 }
@@ -140,6 +142,12 @@ console.log()
             setError("An error occured. Check your input and try again");
         }
     }
+    const frame={
+        border: "1px solid #ddd",
+    borderRadius: "3px",
+    overflow: "auto",
+    marginBottom: "1em",
+    }
 
     return (
         <>
@@ -148,23 +156,67 @@ console.log()
                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
                         <div className="rounded-t bg-white mb-0 px-6 py-6">
                             <div className="text-center flex justify-between">
-                                <h6 className="text-blueGray-700 text-xl font-bold">Upgrade</h6>
+                                <h6 className="text-blueGray-700 text-xl font-bold">Api Access</h6>
                                 <button
                                     className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                     type="button"
-                                >
-                                    Become Reseller
+                                >Reseller
                                 </button>
                             </div>
                         </div>
-                        {/*{loading ? <div className="loader-container">*/}
-                        {/*        <div className="spinner"/>*/}
-                        {/*    </div> :*/}
-                            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                                <img src={ig} />
 
+                        <div className={'card card-body'}>
+
+                            <h4><b>Check User Detail</b></h4>
+                            <div className={frame}>
+                            <pre className={'language-javascript'}>
+                                <code>
+                                    <p>$curl = curl_init();</p>
+
+    <p>curl_setopt_array($curl, array(</p>
+    <p>CURLOPT_URL => 'http://localhost:8081/api/auth/me',</p>
+    <p> CURLOPT_RETURNTRANSFER => true,</p>
+    <p>CURLOPT_ENCODING => '',</p>
+    <p>CURLOPT_MAXREDIRS => 10,</p>
+    <p>CURLOPT_TIMEOUT => 0,</p>
+    <p>CURLOPT_FOLLOWLOCATION => true,</p>
+    <p>CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,</p>
+    <p>CURLOPT_CUSTOMREQUEST => 'POST',</p>
+    <p>CURLOPT_HTTPHEADER => array(</p>
+    <p>'Content-Type: application/json'</p>
+                                    <p>'Authorization': 'hij3dui0678iujk23hegwtfyu23dwky'</p>
+    <p>),</p>
+    <p>));</p>
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
+                                </code>
+                            </pre>
                             </div>
-                        {/*}*/}
+                        <p>Before you access our API, Kindly note the conditions below:</p>
+                        <ul className="w3-ul w3-card" >
+                            <li>1. You have successfully requested for Api Key ({apikey})</li>
+                            <li>2. You can access our api documentation via <a
+                                href="#"
+                                target="_blank"><b>savebills.com.ng/API/docs/index</b></a></li>
+                            <li>3. API service is available for DATA, AIRTIME VTU and BILLS PAYMENT(Dstv, Gotv,
+                                Startimes, Smile Bundle, Smile Recharge, Spectranet, Waec Result Checker)
+                            </li>
+                            <li>4. You can generate a new API key free of charge, note that the formal key will no
+                                longer be functional once you generate a new key
+                            </li>
+                            <li>5. Do not disclose your API key to anyone, Primedata staffs will never request for it
+                            </li>
+                            <li>6. Updates about API service will be sent via mail
+                                to <b>.........</b></li>
+                            <li>7. For any issue about this API service kindly mail our technical department
+                                via <b>info@renomobilemoney.com</b></li>
+                        </ul>
+                        <br></br>
+                    </div>
                     </div>
 
                 </div>
@@ -185,22 +237,20 @@ console.log()
                             <br></br>
                             <br></br>
                             <br></br>
-
+                            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                                <img src={ig} />
+                            </div>
                                 <div className="text-center mt-12">
                                     <ul className="list-group">
-                                        <li className="list-group-item list-group-item-success"> Note That ₦1,000 Will be charged to upgrade your account to reseller<span
+                                        <li className="list-group-item list-group-item-success">Never Release your api-key to anyone in term of security level<span
                                             id="RightT"> </span></li>
 
-                                        <li className="list-group-item list-group-item-info"> You can request for a website after you upgrade. You will have access to cheaper prices of products too!<span
-                                            id="RightT"> </span></li>
 
                                         {loading ? <div className="loader-container">
                                                 <div className="spinner"/>
                                             </div> :
                                             <form>
-                                                <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                                                    Upgrade Now
-                                                </h6>
+
                                                 <div className="flex flex-wrap">
 
                                                     <div className="w-full ">
@@ -209,20 +259,15 @@ console.log()
                                                                 className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                                                 htmlFor="grid-password"
                                                             >
-                                                                Amount To pay
+                                                                Apikey
                                                             </label>
-                                                            <input
-                                                                type="number"
-                                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                                value={'1000'} onChange={(e) => handleInputChange(e)}
-                                                                id="amount"
-                                                                readOnly/>
+                                                          <h3><b>{apikey}</b></h3>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <button type="button" onClick={handleSubmit}
                                                         className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
-                                                    Upgrade Now
+                                                    Reset Key
                                                 </button>
                                                 <hr className="mt-6 border-b-1 border-blueGray-300"/>
                                             </form>

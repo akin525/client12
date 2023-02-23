@@ -40,6 +40,7 @@ export default function Dashboard() {
     const [post, setPost] =useState(null);
     const [all, setall] = useState([]);
     const [noti, setnoti] = useState("");
+    const [apikey, setapikey] = useState("");
     const refer = `${refer1}${name}`;
     let token=localStorage.getItem('dataKey');
     React.useEffect(() => {
@@ -56,7 +57,7 @@ export default function Dashboard() {
                 setMessage(response);
 
                 if (response.data.status ==="0"){
-                    window.location='auth/login';
+                    window.location='/login';
                 }
                 // console.log(response.data);
                 setusername(response.data.username);
@@ -71,6 +72,7 @@ export default function Dashboard() {
                 setaccount_name(response.data.account_name);
                 setbonus(response.data.referbonus);
                 setnoti(response.data.noti);
+                setapikey(response.data.apikey);
 
                 setMessage(response.data.message);
 
@@ -126,10 +128,29 @@ export default function Dashboard() {
             <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
                 <div className="flex flex-wrap items-center">
                     <h4 className="uppercase text-black mb-1 text-xs font-semibold">
-                        Important Notice!
+                        <b>Important Notice! </b>
                     </h4>
                     <h6 className={'text-info'}><b>{noti}</b></h6>
                 </div>
+                <br></br>
+                <p><b className={'italic'}>Account Type: &nbsp;</b>
+                    {apikey ==null ?
+                        <Link className={'btn btn-danger '} style={{margin: "5px"}}><b>Starter</b>
+                        <i
+                            className="text-white  fas fa-user"></i>
+                    </Link>: true}
+                    {apikey !=null ?
+                        <Link className={'btn btn-danger '} style={{margin: "5px"}}><b>Reseller</b>
+                            <i
+                                className="text-white  fas fa-user"></i>
+                        </Link>: true}
+                    {apikey ==null ?
+                    <button className="btn btn-success" style={{fontSize: "13px"}}>Upgrade<i
+                        className="text-white  fas fa-user"></i></button>:true}
+                    {apikey !=null ?
+                    <button className="btn btn-success" style={{fontSize: "13px"}}>Upgraded! <i
+                        className="text-white  fas fa-user"></i></button>:true}
+                </p>
             </div>
         </div>
         <div className="flex flex-wrap">

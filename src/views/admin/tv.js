@@ -28,10 +28,21 @@ export default function Tv() {
     const baseURL = "https://server.savebills.com.ng/api/auth/verifytv";
     const baseURL3 = "https://server.savebills.com.ng/api/auth/buytv";
     let token=localStorage.getItem('dataKey');
+    const [con, setcon] = useState("");
+
+    function myCallback(data) {
+        setcon(JSON.stringify(data.success));
+    }
+
 
     React.useEffect(() => {
         setrefid("tv"+Math.floor((Math.random() * 1000000000) + 1));
+        try {
+            window.web2app.advert.showbanner(myCallback);
 
+        }catch (e) {
+            console.log("Can not excecute for now");
+        }
         axios
             .get(baseURL1, {
                 // username:useCookies('username'),

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 // components
 import axios from "axios";
 import swal from "sweetalert";
+import {Link} from "react-router-dom";
 export default function CardSettings() {
 
   const [username, setusername] = useState("");
@@ -12,6 +13,7 @@ export default function CardSettings() {
   const [email, setemail]=useState([])
   const [number,setnumber] = useState("");
   const baseURL1 = "https://server.savebills.com.ng/api/auth/dashboard";
+  const [apikey, setapikey] = useState("");
 
   const btns = document.querySelectorAll('button');
   btns.forEach((items)=>{
@@ -28,7 +30,7 @@ export default function CardSettings() {
   React.useEffect(() => {
     setLoading(true);
     try {
-      window.web2app.showinterstitial(myCallback);
+      window.web2app.advert.showinterstitial(myCallback);
 
     }catch (e) {
       console.log("Can not excecute for now");
@@ -52,6 +54,7 @@ export default function CardSettings() {
           setname(response.data.name);
           setemail(response.data.email);
           setnumber(response.data.phone);
+          setapikey(response.data.apikey);
           setLoading(false);
 
         });
@@ -160,6 +163,19 @@ export default function CardSettings() {
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   User Information
                 </h6>
+                <p><b className={'italic'}>Account Type: &nbsp;</b>
+                  {apikey ==null ?
+                      <Link className={'btn btn-danger '} style={{margin: "5px"}}><b>Starter</b>
+                        <i
+                            className="text-white  fas fa-user"></i>
+                      </Link>: true}
+                  {apikey !=null ?
+                      <Link className={'btn btn-danger '} style={{margin: "5px"}}><b>Reseller</b>
+                        <i
+                            className="text-white  fas fa-user"></i>
+                      </Link>: true}
+                </p>
+
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
@@ -229,6 +245,67 @@ export default function CardSettings() {
                 <button type="button" onClick={handleSubmit}
                         className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
                   Update Profile<span className="load loading"></span>
+                </button>
+                <hr className="mt-6 border-b-1 border-blueGray-300"/>
+
+              </form>
+            </div>
+
+            <div className="rounded-t bg-white mb-0 px-6 py-6">
+              <div className="text-center flex justify-between">
+                <h6 className="text-blueGray-700 text-xl font-bold">Settings</h6>
+                <button
+                    className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                    type="button"
+                >
+                 Change Password
+                </button>
+              </div>
+            </div>
+            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+              <form>
+                <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                  Update Password
+                </h6>
+
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                      >
+                        New Password
+                      </label>
+                      <input
+                          type="text"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          value={username} onChange={(e) => handleInputChange(e)} id="username"
+
+                          readOnly/>
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                      >
+                        Confirm Password
+                      </label>
+                      <input
+                          type="email"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+
+                          value={email} onChange={(e) => handleInputChange(e)} id="email"
+
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button type="button" onClick={handleSubmit}
+                        className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
+                  Change Password<span className="load loading"></span>
                 </button>
                 <hr className="mt-6 border-b-1 border-blueGray-300"/>
 

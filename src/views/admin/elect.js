@@ -32,10 +32,16 @@ export default function Elect() {
     const baseURL = "https://server.savebills.com.ng/api/auth/verifyelect";
     const baseURL3 = "https://server.savebills.com.ng/api/auth/buyelect";
     let token=localStorage.getItem('dataKey');
-
+    function myCallback(data) {
+    }
     React.useEffect(() => {
         setrefid("elect"+Math.floor((Math.random() * 1000000000) + 1));
+        try {
+            window.web2app.advert.showbanner(myCallback);
 
+        }catch (e) {
+            console.log("Can not excecute for now");
+        }
         axios
             .get(baseURL1, {
                 // username:useCookies('username'),

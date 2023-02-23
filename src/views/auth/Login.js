@@ -32,9 +32,14 @@ export default function Login() {
 
   function myCallback(data) {
     setcon(JSON.stringify(data.success));
+    // alert(JSON.stringify(data));
+
+  }
+  function myCallback1(data) {
+    setcon(JSON.stringify(data.success));
   }
   function myCall(data) {
-    // alert(JSON.stringify(data);
+    // alert(JSON.stringify(data));
   }
 
   function contactCallback(data) {
@@ -90,6 +95,7 @@ export default function Login() {
   }
   React.useEffect(()=> {
     try {
+      window.web2app.confirmlogin.islogout(myCallback1);
       window.web2app.deviceInfo(myCallback);
      window.web2app.biometric.check(myCall)
     }catch (e) {

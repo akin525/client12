@@ -50,7 +50,8 @@ export default function Data() {
 
     React.useEffect(() => {
         try {
-            window.web2app.showbanner(myCallback);
+            window.web2app.advert.showbanner(myCallback);
+
 
         }catch (e) {
             console.log("Can not excecute for now");
@@ -171,10 +172,7 @@ export default function Data() {
                         text: response.data.message,
                         icon: "error",
                         confirmButtonText: "OK",
-                    }).then(function () {
-                        // Redirect the user
-                        window.location.href = "/data";
-                    });
+                    })
 
 
                 }else{

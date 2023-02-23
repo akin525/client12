@@ -32,8 +32,16 @@ export default function Dashboard({color}) {
 
     const baseURL = "https://server.savebills.com.ng/api/auth/buydata";
     let token=localStorage.getItem('dataKey');
+    function myCallback(data) {
 
+    }
     React.useEffect(() => {
+        try {
+            window.web2app.advert.showinterstitial(myCallback);
+
+        }catch (e) {
+            console.log("Can not excecute for now");
+        }
 
         axios
             .get(baseURL2, {

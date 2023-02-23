@@ -25,7 +25,7 @@ export default function Purchase({color}) {
 
         setLoading(true);
         try {
-            window.web2app.showinterstitial(myCallback);
+            window.web2app.advert.showinterstitial(myCallback);
 
         }catch (e) {
             console.log("Can not excecute for now");

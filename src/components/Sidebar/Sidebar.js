@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import   'load.css';
+import   'prism.css';
 
 import { Link } from "react-router-dom";
 
@@ -25,6 +26,7 @@ export default function Sidebar() {
   const [message, setMessage] = useState("");
   const [post, setPost] = React.useState(null);
   const [all, setall] = React.useState([]);
+  const [apikey, setapikey]=React.useState();
   let token=localStorage.getItem('dataKey');
   const we={
     position:"fixed",
@@ -56,11 +58,11 @@ export default function Sidebar() {
     // document.getElementById('anyme'.value=data.data;
   }
   function pick(){
-    window.web2app.showinterstitial(myCallback)
+    window.web2app.advert.showinterstitial(myCallback)
   }
   React.useEffect(() => {
     try {
-      window.web2app.islogin(myCallback);
+      window.web2app.confirmlogin.islogin(myCallback);
     }catch (e) {
       console.log("Can not excecute for now");
     }
@@ -81,13 +83,13 @@ export default function Sidebar() {
           }
           setusername(response.data.username);
           setName(response.data.username);
-          setEmail(response.data.email);
           setBalance(response.data.wallet);
           setName(response.data.name);
           setTotalbill(response.data.totalbill);
           setTotaldeposit(response.data.totaldeposit);
           setall(response.data.bills);
-
+          setapikey(response.data.apikey);
+          console.log(apikey);
           setMessage(response.data.message);
 
 
@@ -280,29 +282,54 @@ export default function Sidebar() {
                   Profile
                 </Link>
               </li>
-              <li className="items-center">
-                <Link
-                    onClick={() => setCollapseShow("hidden")}
+              {apikey ===null ? (
+                  <li className="items-center">
+                    <Link
+                        onClick={() => setCollapseShow("hidden")}
+                        className={
+                          "text-xs uppercase py-3 font-bold block " +
+                          (window.location.href.indexOf("/upgrade") !== -1
+                              ? "text-lightBlue-500 hover:text-lightBlue-600"
+                              : "text-blueGray-700 hover:text-blueGray-500")
+                        }
+                        to="/upgrade"
+                    >
+                      <i
+                          className={
+                            "fas fa-bookmark mr-2 text-sm " +
+                            (window.location.href.indexOf("/upgrade") !== -1
+                                ? "opacity-75"
+                                : "text-blueGray-300")
+                          }
+                      ></i>{" "}
+                      Become Reseller
+                    </Link>
+                  </li>
+              ) : (
+                  <li className="items-center">
+                    <Link
+                        onClick={() => setCollapseShow("hidden")}
+                        className={
+                          "text-xs uppercase py-3 font-bold block " +
+                          (window.location.href.indexOf("/reseller") !== -1
+                              ? "text-lightBlue-500 hover:text-lightBlue-600"
+                              : "text-blueGray-700 hover:text-blueGray-500")
+                        }
+                        to="/reseller"
+                    >
+                      <i
+                          className={
+                            "fas fa-bookmark mr-2 text-sm " +
+                            (window.location.href.indexOf("/reseller") !== -1
+                                ? "opacity-75"
+                                : "text-blueGray-300")
+                          }
+                      ></i>{" "}
+                      Api Access
+                    </Link>
+                  </li>
+              )}
 
-                    className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/upgrade") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/upgrade"
-                >
-                  <i
-                    className={
-                      "fas fa-bookmark mr-2 text-sm " +
-                      (window.location.href.indexOf("/upgrade") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Become Reseller
-                </Link>
-              </li>
               <li className="items-center">
                 <Link
                     onClick={() => setCollapseShow("hidden")}
