@@ -35,6 +35,10 @@ function pick(){
     window.web2app.selectContact(contactCallback);
 
 }
+function loader(){
+    window.web2app.advert.showinterstitial(myCallback);
+
+}
 console.log()
     React.useEffect(() => {
         try {
@@ -125,7 +129,6 @@ console.log()
                         icon: "error",
                         confirmButtonText: "OK",
                     })
-
                 }else{
                     setMessage(response.data.message);
                     // const [cookies, setCookie] = useCookies(response.data.username);
@@ -134,10 +137,9 @@ console.log()
                         text: response.data.message,
                         icon: "success",
                         confirmButtonText: "OK",
-                    }).then(function () {
-                        // Redirect the user
-                        window.location.href = "/dashboard";
-                    });
+                    })
+                    loader()
+
                 }
                 // setPost(response.data);
             });

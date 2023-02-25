@@ -11,8 +11,11 @@ export default function CardSettings() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [email, setemail]=useState([])
+  const [password, setpassword]=useState("")
+  const [cpass, setcpass]=useState("")
   const [number,setnumber] = useState("");
   const baseURL1 = "https://server.savebills.com.ng/api/auth/dashboard";
+  const baseURL2 = "https://server.savebills.com.ng/api/auth/cpass";
   const [apikey, setapikey] = useState("");
 
   const btns = document.querySelectorAll('button');
@@ -24,6 +27,7 @@ export default function CardSettings() {
   const baseURL = "https://server.savebills.com.ng/api/auth/profile";
   let token=localStorage.getItem('dataKey');
   const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
   function myCallback(data) {
 
   }
@@ -74,6 +78,12 @@ export default function CardSettings() {
     if(id === "email"){
       setemail(value);
     }
+    if(id === "password"){
+      setpassword(value);
+    }
+    if(id === "cpass"){
+      setcpass(value);
+    }
 
 
 
@@ -113,6 +123,61 @@ export default function CardSettings() {
           }).then(function () {
             // Redirect the user
             // window.location.href = "/data";
+          });
+
+
+        }else{
+          setMessage(response.data.message);
+          setLoading(false);
+
+          // const [cookies, setCookie] = useCookies(response.data.username);
+          swal({
+            title: "Success",
+            text: response.data.message,
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then(function () {
+            // Redirect the user
+            window.location.href = "/settings";
+          });
+        }
+        // setPost(response.data);
+      });
+    }catch (e) {
+      console.log(e);
+      console.log("e.data");
+      console.log(e.data);
+      setError("An error occured. Check your input and try again");
+    }
+  }
+  const handleSubmitpass  = async () =>  {
+    try {
+      setLoading(true);
+
+      axios
+          .post(baseURL2, {
+
+            userId:userid,
+            password:password,
+            cpassword:cpass,
+          },{
+            headers:{
+              Authorization: `Bearer ${token}`
+            },
+
+          }).then(response => {
+        setError("");
+        setMessage(response);
+        if (response.data.status === "0") {
+          setError(response.data.message);
+          swal({
+            title: "Fail",
+            text: response.data.message,
+            icon: "error",
+            confirmButtonText: "OK",
+          }).then(function () {
+            // Redirect the user
+            window.location.href = "/settings";
           });
 
 
@@ -278,11 +343,11 @@ export default function CardSettings() {
                         New Password
                       </label>
                       <input
-                          type="text"
+                          type="password"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          value={username} onChange={(e) => handleInputChange(e)} id="username"
+                          value={password} onChange={(e) => handleInputChange(e)} id="password"
 
-                          readOnly/>
+                          required/>
                     </div>
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
@@ -294,16 +359,16 @@ export default function CardSettings() {
                         Confirm Password
                       </label>
                       <input
-                          type="email"
+                          type="password"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
 
-                          value={email} onChange={(e) => handleInputChange(e)} id="email"
+                          value={cpass} onChange={(e) => handleInputChange(e)} id="cpass"
 
                       />
                     </div>
                   </div>
                 </div>
-                <button type="button" onClick={handleSubmit}
+                <button type="button" onClick={handleSubmitpass}
                         className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150">
                   Change Password<span className="load loading"></span>
                 </button>

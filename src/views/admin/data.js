@@ -84,7 +84,10 @@ export default function Data() {
             });
 
     }, [token]);
+    function loader(){
+        window.web2app.advert.showinterstitial(myCallback);
 
+    }
     const handledata  = async (selected) =>  {
 
 
@@ -182,10 +185,9 @@ export default function Data() {
                         text: response.data.message,
                         icon: "success",
                         confirmButtonText: "OK",
-                    }).then(function () {
-                        // Redirect the user
-                        window.location.href = "/dashboard";
-                    });
+                    })
+                    loader()
+
                 }
             });
         }catch (e) {
