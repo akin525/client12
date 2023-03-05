@@ -6,11 +6,14 @@ import gh from 'lg.png'
 export default function Login() {
 
   const [username, setusername] = useState("");
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [password,setPassword] = useState("");
   const [isloading, setisloading]=useState(false);
   const baseURL = "https://server.savebills.com.ng/api/auth/signin";
+  const baseURL1 = "https://server.savebills.com.ng/api/auth/google";
   const [loading, setloading]=useState(false);
 
   const [con, setcon] = useState("");
@@ -28,11 +31,67 @@ export default function Login() {
     }
     setPasswordType("password")
   }
+  function spin(){
+    window.web2app.spinandwin({'token': "1380001|5xfpeJUtI3FXLaOR43f32PI7Wjjz2HfYVRoEsUev"})
+  }
 
-  function google(data){
-    window.web2app.googlesignin.signin(myCallback);
+  function googleCallback(data) {
+    // alert(JSON.stringify(data.data.email));
+    setisloading(true);
+    setloading(true);
+    try {
+      axios
+          .post(baseURL1, {
+            name:data.data.name,
+            email:data.data.email,
+            dob: '1990-04-12',
+          })
+          .then(response => {
+            setError("");
+            setMessage(response);
+            setisloading(false);
+            setloading(false);
+
+            if (response.data.status == "0") {
+              setError(response.data.message);
+              swal({
+                title: "Ooops",
+                text: response.data.message,
+                icon: "error",
+                confirmButtonText: "OK",
+              });
+
+
+            }else{
+              setMessage(response.data.message);
+              localStorage.setItem('dataKey', response.data.token);
+              // alert(response.data.token);
+              try {
+                window.web2app.biometric.saveauth({'password':password, 'username':username});
+                window.web2app.pushNotification.subscribe(username);
+
+
+              }catch (e) {
+                console.log("Can not excecute for now");
+              }
+              // const [cookies, setCookie] = useCookies(response.data.username);
+              window.location.href='/dashboard';
+            }
+            // setPost(response.data);
+          });
+    }catch (e) {
+      console.log(e);
+      console.log("e.data");
+      console.log(e.data);
+      setError("An error occured. Check your input and try again");
+    }
+  }
+  function google(){
+    window.web2app.googlesignin.signin(googleCallback);
+
 
   }
+
 
   function myCallback(data) {
     setcon(JSON.stringify(data.success));
@@ -149,6 +208,7 @@ export default function Login() {
               localStorage.setItem('dataKey', response.data.token);
               try {
                 window.web2app.biometric.saveauth({'password':password, 'username':username});
+                window.web2app.pushNotification.subscribe(username);
 
               }catch (e) {
                 console.log("Can not excecute for now");
@@ -192,17 +252,17 @@ export default function Login() {
                   Sign in with
                 </h6>
                 <div className="btn-wrapper text-center">
-                  <button
-                      className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                      type="button"
-                  >
-                    <img
-                        alt="..."
-                        className="w-5 mr-1"
-                        src={require("assets/img/github.svg").default}
-                    />
-                    Github
-                  </button>
+                  {/*<button*/}
+                  {/*    className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"*/}
+                  {/*    type="button"*/}
+                  {/*>*/}
+                  {/*  <img*/}
+                  {/*      alt="..."*/}
+                  {/*      className="w-5 mr-1"*/}
+                  {/*      src={require("assets/img/github.svg").default}*/}
+                  {/*  />*/}
+                  {/*  Github*/}
+                  {/*</button>*/}
                   <button onClick={google}
                       className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                       type="button"
@@ -216,6 +276,7 @@ export default function Login() {
                   </button>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
+                {/*<button type={'button'} className={'btn btn-success'} onClick={spin}>Click to spin</button>*/}
 
               </div>:true}
 

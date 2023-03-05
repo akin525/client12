@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import CardSettings from "../../components/Cards/CardSettings";
 import CardProfile from "../../components/Cards/CardProfile";
 import gh from "../../lg.png";
+import spin1 from "../../spin.png";
 
 export default function Airtime() {
     const [network, setnetwork] = useState("");
@@ -248,6 +249,7 @@ console.log()
                         }
                     </div>
 
+
                 </div>
                 <div className="w-full lg:w-4/12 px-4">
                     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -266,8 +268,10 @@ console.log()
                             <br></br>
                             <br></br>
                             <br></br>
+                            <img src={spin1} />
 
-                                <div className="text-center mt-12">
+
+                            <div className="text-center mt-12">
                                     <ul className="list-group">
                                         <li className="list-group-item list-group-item-primary">MTN Airtime VTU <span
                                             id="RightT"> *556#  </span></li>

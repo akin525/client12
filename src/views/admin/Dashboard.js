@@ -6,11 +6,15 @@ import swal from "sweetalert";
 import { Link } from "react-router-dom";
 
 import ig from 'ba1.png';
+import spin1 from 'spin.png';
+import goo from 'google.png';
+import sp from 'sp.png';
 import CardLineChart from "components/Cards/CardLineChart.js";
 import CardBarChart from "components/Cards/CardBarChart.js";
 import CardPageVisits from "components/Cards/CardPageVisits.js";
 import CardSocialTraffic from "components/Cards/CardSocialTraffic.js";
 import CardStats from "../../components/Cards/CardStats";
+import gh from "../../lg.png";
 
 export default function Dashboard() {
     const [loading, setLoading] = useState(false);
@@ -41,9 +45,25 @@ export default function Dashboard() {
     const [all, setall] = useState([]);
     const [noti, setnoti] = useState("");
     const [apikey, setapikey] = useState("");
+    const [con, setcon] = useState("");
+
     const refer = `${refer1}${name}`;
     let token=localStorage.getItem('dataKey');
+    function spin(){
+        window.web2app.spinandwin({'token': "1380001|5xfpeJUtI3FXLaOR43f32PI7Wjjz2HfYVRoEsUev"})
+    }
+
+    function myCallback(data) {
+        setcon(JSON.stringify(data.success));
+
+    }
     React.useEffect(() => {
+        try {
+            window.web2app.deviceInfo(myCallback);
+
+        }catch (e) {
+            console.log("Can not excecute for now");
+        }
         setLoading(true);
         axios
             .get(baseURL, {
@@ -206,6 +226,7 @@ export default function Dashboard() {
                             >
                                 <i className="fa fa-wallet"></i>
                             </div>
+
                         </div>
                     </div>
                     <p className="text-sm text-blueGray-400 mt-4">
@@ -269,19 +290,50 @@ export default function Dashboard() {
                             <span className="whitespace-nowrap">Total Safe-lock</span>
                         </p>
 
-                        {/*<Link*/}
-                        {/*        className="bg-lightBlue-400 text-white active:bg-green-700  font-bold uppercase text-xs px-4 py-2"*/}
-                        {/* to="/withdraw"*/}
-                        {/*>*/}
-
-                        {/*    Withdraw*/}
-                        {/*</Link>*/}
                     </div>
                 </div>
             </div>
         </div>
         <br></br>
+        <div className="flex flex-wrap">
+        <div className="w-full lg:w-8/12 px-4">
+            <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+                <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <img src={spin1} />
+
+                </div>
+                {/*}*/}
+                <center>
+                    <span className={'list-group-item list-group-item-info'}>To enjoy spin and win bonus kindly download our app on Google Playstore</span>
+                </center>
+            </div>
+
+        </div>
+        <div className="w-full lg:w-4/12 px-4">
+            <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+            <div className="px-6">
+                <center>
+                    {con == "true" ?(
+                        <img src={sp} onClick={spin}/>
+
+                    ):(
+                        <a href="https://play.google.com/store/apps/details?id=com.a5starcompany.savebills">
+                        <img src={goo}/>
+
+                        </a>
+
+                    )}
+
+                </center>
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <br></br>
         <img src={ig} />
+
 
         <br></br>
 
