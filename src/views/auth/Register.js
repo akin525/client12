@@ -278,8 +278,8 @@ console.log(baseURL);
                                 required="">
 
                           <option>Select Gender</option>
-                          <option value="male">MALE</option>
-                          <option value="female">FEMALE</option>
+                          <option value="Male">MALE</option>
+                          <option value="Female">FEMALE</option>
 
                         </select>
                       </div>

@@ -28,6 +28,7 @@ import Add from "views/admin/add.js";
 import Bank from "views/admin/withdraw.js";
 import Upgrade from "../views/admin/upgrade";
 import Reseller from "../views/admin/reseller";
+import Game from "../views/admin/game";
 
 export default function Admin() {
   return (
@@ -58,6 +59,7 @@ export default function Admin() {
             <Route path="/admin/tables" exact component={Tables} />
             <Route path="/upgrade" exact component={Upgrade} />
             <Route path="/reseller" exact component={Reseller} />
+            <Route path="/game" exact component={Game} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />

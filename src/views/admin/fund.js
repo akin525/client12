@@ -18,6 +18,7 @@ export default function Dashboard() {
     const [account_number, setaccount_number] = useState("0");
     const [account_number1, setaccount_number1] = useState("0");
     const [account_name, setaccount_name] = useState("0");
+    const [bank, setbank] = useState("");
     const [account_name1, setaccount_name1] = useState("0");
     const [userid, setuserid] = useState("");
     const [amount, setamount] = useState("");
@@ -54,11 +55,19 @@ export default function Dashboard() {
                 setaccount_name1(response.data.account_name1);
                 setuserid(response.data.id);
                 setemail(response.data.email);
+                if (response.data.bank=="") {
+                    setbank('VFD Microfinance Bank');
+
+                }else {
+                    setbank(response.data.bank);
+                }
 
                 setMessage(response.data.message);
 
                 setLoading(false);
             });
+
+
 
     }, []);
 
@@ -72,11 +81,12 @@ export default function Dashboard() {
 
     const handleSubmit  = async () =>  {
 
+
         // html: "<h6>Account Number:"+account_number+"</h6><br><h6>Account Name:</h6>"+account_name+"</h6>",
                 if (amount <= 3500) {
                     swal({
                         title: "Fund With",
-                        text:"Account Number:"+account_number1+" || Account Name:"+account_name1+" || Bank Name: VFD Microfinance Bank",
+                        text:"Account Number:"+account_number1+" || Account Name:"+account_name1+" || Bank Name:"+bank,
                         icon: "success",
                         confirmButtonText: "OK",
                     })
