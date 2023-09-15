@@ -8,6 +8,7 @@ import CardProfile from "components/Cards/CardProfile.js";
 import axios from "axios";
 import swal from "sweetalert";
 import gh from "../../lg.png";
+import {toast, ToastContainer} from "react-toastify";
 
 export default function Createlock() {
 
@@ -92,13 +93,16 @@ export default function Createlock() {
 
                     if (response.data.status === "0") {
                         setError(response.data.message);
-                        swal({
-                            title: "Ooops",
-                            text: response.data.message,
-                            icon: "error",
-                            confirmButtonText: "OK",
-                        })
-
+                        // swal({
+                        //     title: "Ooops",
+                        //     text: response.data.message,
+                        //     icon: "error",
+                        //     confirmButtonText: "OK",
+                        // })
+                        toast.error(response.data.message, {
+                            position: "top-center",
+                            autoClose: 3000, // Time in milliseconds, or false to disable autoclose
+                        });
 
                     }else{
                         setMessage(response.data.message);
@@ -138,6 +142,7 @@ export default function Createlock() {
                             </div>
                         </div>
                         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                            <ToastContainer/>
                             <form>
                                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase text-success">
                                     Save more money and get 10% increment per annual
