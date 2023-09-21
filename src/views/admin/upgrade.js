@@ -1,5 +1,3 @@
-
-
 import React, {useState} from "react";
 import axios from "axios";
 import swal from "sweetalert";
@@ -7,6 +5,8 @@ import CardSettings from "../../components/Cards/CardSettings";
 import CardProfile from "../../components/Cards/CardProfile";
 import gh from "../../lg.png";
 import ig from "../../ba.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Upgrade() {
     const [network, setnetwork] = useState("");
@@ -110,13 +110,16 @@ console.log()
                 setloading(false);
                 if (response.data.status === "0") {
                     setError(response.data.message);
-                    swal({
-                        title: "Fail",
-                        text: response.data.message,
-                        icon: "error",
-                        confirmButtonText: "OK",
-                    })
-
+                    // swal({
+                    //     title: "Fail",
+                    //     text: response.data.message,
+                    //     icon: "error",
+                    //     confirmButtonText: "OK",
+                    // })
+                    toast.error(response.data.message, {
+                        position: "top-center",
+                        autoClose: 3000, // Time in milliseconds, or false to disable autoclose
+                    });
 
                 }else{
                     setMessage(response.data.message);
@@ -185,6 +188,7 @@ console.log()
                             <br></br>
                             <br></br>
                             <br></br>
+                            <ToastContainer/>
 
                                 <div className="text-center mt-12">
                                     <ul className="list-group">
