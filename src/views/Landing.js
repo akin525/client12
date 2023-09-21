@@ -5,8 +5,15 @@ import { Link } from "react-router-dom";
 
 import Navbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import 'assets/css/style.css';
+import 'assets/css/lib/swiper.min.css';
+import 'assets/css/lib/lity.css';
+import 'assets/css/lib/jquery.fancybox.css';
+import 'assets/css/lib/animate.css';
+import 'assets/css/lib/all.min.css';
 
 export default function Landing() {
+
   return (
     <>
       <Navbar transparent />

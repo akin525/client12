@@ -144,6 +144,30 @@ export default function Dashboard() {
     };
     return (
     <>
+        {/*<div className="row">*/}
+
+        {/*    <div className="col-xl-3 col-md-6">*/}
+        {/*        <div className="card bg-primary">*/}
+        {/*            <div className="card-header border-0">*/}
+        {/*                <h4 className="heading mb-0 text-white">Balance & Deposit 😎</h4>*/}
+        {/*            </div>*/}
+        {/*            <div className="card-body">*/}
+        {/*                <div className="d-flex justify-content-between">*/}
+        {/*                    <div className="sales-bx">*/}
+        {/*                        <i className="fa fa-money yellow_color" style={{fontSize: "30px"}}></i>*/}
+        {/*                        <h4>₦{balance}</h4>*/}
+        {/*                        <span>Balance</span>*/}
+        {/*                    </div>*/}
+        {/*                    <div className="sales-bx">*/}
+        {/*                        <i className="fa fa-money blue1_color" style={{fontSize: "30px"}}></i>*/}
+        {/*                        <h4>₦{totaldeposit}</h4>*/}
+        {/*                        <span>Total Deposit</span>*/}
+        {/*                    </div>*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        </div>*/}
+        {/*    </div>*/}
+        {/*</div>*/}
         <div className="card relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blue-900">
             <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
                 <div className="flex flex-wrap items-center">

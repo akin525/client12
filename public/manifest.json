@@ -1,14 +1,14 @@
 {
-  "short_name": "Notus React",
+  "short_name": "Savebills",
   "name": "Notus React by Creative Tim",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://bills.renomobilemoney.com/lg.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "apple-icon.png",
+      "src": "https://bills.renomobilemoney.com/lg.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }

@@ -30,7 +30,6 @@ export default function Dashboard() {
     let token=localStorage.getItem('dataKey');
 
 
-
     React.useEffect(() => {
         setLoading(true);
         axios
@@ -78,6 +77,7 @@ export default function Dashboard() {
             setamount(value);
         }
     }
+
 
     const handleSubmit  = async () =>  {
 

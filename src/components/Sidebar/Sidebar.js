@@ -82,7 +82,7 @@ export default function Sidebar() {
             window.location='login';
           }
           setusername(response.data.username);
-          setName(response.data.username);
+          // setName(response.data.username);
           setBalance(response.data.wallet);
           setName(response.data.name);
           setTotalbill(response.data.totalbill);

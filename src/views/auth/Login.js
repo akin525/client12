@@ -5,6 +5,22 @@ import swal from "sweetalert";
 import gh from 'lg.png'
 export default function Login() {
 
+  function handleAddToHomeScreen() {
+    if ('standalone' in window.navigator && window.navigator.standalone) {
+      // The app is already installed and running in standalone mode
+      return;
+    }
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      // The app is running in standalone mode
+      return;
+    }
+
+    // Prompt the user to add the app to the home screen
+    // You can customize the UI and message based on your requirements
+    window.alert('Add this app to your home screen for quick access.');
+  }
+
   const [username, setusername] = useState("");
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -89,7 +105,6 @@ export default function Login() {
   function google(){
     window.web2app.googlesignin.signin(googleCallback);
 
-
   }
 
 
@@ -137,7 +152,7 @@ export default function Login() {
 
 
             }else{
-              setMessage(response.data.message);
+              // setMessage(response.data.message);
               localStorage.setItem('dataKey', response.data.token);
 
               // const [cookies, setCookie] = useCookies(response.data.username);
@@ -204,7 +219,6 @@ export default function Login() {
 
 
             }else{
-              setMessage(response.data.message);
               localStorage.setItem('dataKey', response.data.token);
               try {
                 window.web2app.biometric.saveauth({'password':password, 'username':username});
@@ -279,6 +293,8 @@ export default function Login() {
                 {/*<button type={'button'} className={'btn btn-success'} onClick={spin}>Click to spin</button>*/}
 
               </div>:true}
+              {/*<button className="btn btn-success" onClick={handleAddToHomeScreen}>Add to Home Screen</button>*/}
+
 
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-blueGray-400 text-center mb-3 font-bold">

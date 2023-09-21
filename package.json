@@ -13,9 +13,11 @@
     "chart.js": "2.9.4",
     "gulp": "^3.9.1",
     "gulp-append-prepend": "1.0.8",
+    "mixitup": "^3.3.1",
     "prismjs": "^1.29.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-paginate": "^8.2.0",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
     "react-scripts": "^5.0.1",
@@ -48,5 +50,9 @@
   },
   "optionalDependencies": {
     "typescript": "4.2.3"
+  },
+  "devDependencies": {
+    "workbox-webpack-plugin": "^7.0.0",
+    "workbox-window": "^7.0.0"
   }
 }

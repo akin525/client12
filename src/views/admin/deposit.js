@@ -19,6 +19,9 @@ export default function Deposit({color}) {
     const [amount,setamount] = useState("");
     const baseURL2 = "https://server.savebills.com.ng/api/auth/alldeposit";
     const baseURL1 = "https://server.savebills.com.ng/api/auth/dashboard";
+    const [currentPage, setCurrentPage] = useState(0);
+    const perPage = 10; // Number of items to display per page
+    const [searchTerm, setSearchTerm] = useState('');
 
 
     const baseURL = "https://server.savebills.com.ng/api/auth/buydata";
@@ -48,12 +51,47 @@ export default function Deposit({color}) {
             });
 
     }, [token]);
+    const handleSearch = event => {
+        setSearchTerm(event.target.value);
+    };
+    const filteredData = datass.filter(
+        person => {
+            if (datass.length ===0) return [];
+            return (
+                person
+                    .username
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())||person
+                    .amount
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())||person
+                    .createdAt
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase()) ||person
+                    .payment_ref
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+            );
+        }
+    );
+
+
+    const offset = currentPage * perPage;
+    const currentPageData = filteredData.slice(offset, offset + perPage);
 
     return (
 
         <>
             <div className="flex flex-wrap mt-4">
                 <div className="w-full mb-12 px-4">
+                    <div className="card card-body">
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            onChange={handleSearch}
+                            value={searchTerm}
+                        />
+                    </div>
                     <div
                         className={
                             "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
@@ -166,7 +204,7 @@ export default function Deposit({color}) {
                                 </tr>
                                 </thead>
                                     <tbody>
-                                    {datass.map((datab) => (
+                                    {currentPageData.map((datab) => (
                                         <tr>
                                             <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                                                 <span
@@ -206,6 +244,40 @@ export default function Deposit({color}) {
                                     </tbody>
                             </table>
                                 }
+
+                            {/* Add the pagination component */}
+                            <div className="button-pagination">
+                                {/* ... existing code ... */}
+
+                                {/* Add the pagination buttons */}
+                                <button
+                                    className={currentPage === 0 ? 'disabled' : ''}
+                                    onClick={() => setCurrentPage((prev) => prev - 1)}
+                                    disabled={currentPage === 0}
+                                >
+                                    Previous
+                                </button>
+                                {Array.from({ length: Math.ceil(filteredData.length / perPage) }).map(
+                                    (_, index) => (
+                                        <button
+                                            key={index}
+                                            className={currentPage === index ? 'active' : ''}
+                                            onClick={() => setCurrentPage(index)}
+                                        >
+                                            {index + 1}
+                                        </button>
+                                    )
+                                )}
+                                <button
+                                    className={currentPage === Math.ceil(filteredData.length / perPage) - 1 ? 'disabled' : ''}
+                                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                                    disabled={currentPage === Math.ceil(filteredData.length / perPage) - 1}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                            <br/>
+
                         </div>
                     </div>
                 </div>
